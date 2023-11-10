@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary and Hexadecimal Addition</title>
+</head>
+<body>
+
+<script>
+
+const binaryModule = (function () {
+  function add(a, b) {
+    const decimalA = parseInt(a, 2);
+    const decimalB = parseInt(b, 2);
+    const sumDecimal = decimalA + decimalB;
+    return sumDecimal.toString(2);
+  }
+
+  return {
+    add
+  };
+})();
+
+
+const hexModule = (function () {
+  function add(a, b) {
+    const decimalA = parseInt(a, 16);
+    const decimalB = parseInt(b, 16);
+    const sumDecimal = decimalA + decimalB;
+    return sumDecimal.toString(16).toUpperCase();
+  }
+
+  return {
+    add
+  };
+})();
+
+
+const mainModule = (function () {
+  function start() {
+    const additionType = prompt("Enter 'bin' for binary addition or 'hex' for hexadecimal addition:");
+
+    switch (additionType) {
+      case 'bin':
+        performBinaryAddition();
+        break;
+      case 'hex':
+        performHexadecimalAddition();
+        break;
+      default:
+        alert('Invalid addition type!');
+    }
+  }
+
+  function performBinaryAddition() {
+    const num1 = prompt("Enter the first binary number:");
+    const num2 = prompt("Enter the second binary number:");
+
+    if (!isValidBinary(num1) || !isValidBinary(num2)) {
+      alert('Invalid number entered!');
+      return;
+    }
+
+    const result = binaryModule.add(num1, num2);
+    alert(`Binary Addition Result: ${result}`);
+  }
+
+  function performHexadecimalAddition() {
+    const num1 = prompt("Enter the first hexadecimal number:");
+    const num2 = prompt("Enter the second hexadecimal number:");
+
+    if (!isValidHexadecimal(num1) || !isValidHexadecimal(num2)) {
+      alert('Invalid number entered!');
+      return;
+    }
+
+    const result = hexModule.add(num1, num2);
+    alert(`Hexadecimal Addition Result: ${result}`);
+  }
+
+  function isValidBinary(str) {
+    return /^[01]+$/.test(str);
+  }
+
+  function isValidHexadecimal(str) {
+    return /^[0-9A-Fa-f]+$/.test(str);
+  }
+
+  return {
+    start
+  };
+})();
+
+// Start the program
+mainModule.start();
+</script>
+
+</body>
+</html>
+
+
